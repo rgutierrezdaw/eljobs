@@ -1,0 +1,29 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+.form-content{
+    display: block;
+    padding-top: 3%;
+    justify-content: center;
+    position: absolute;
+    top: 20%;
+    width: 550px;
+    height: 350px;
+    background-color:#61C9A8;
+}
+
+.title{
+    color:  #4C3B4D;
+    font-weight: bold;
+}
+
+.button{
+    background-color: #4C3B4D;
+    color: #fffcf8;
+}
