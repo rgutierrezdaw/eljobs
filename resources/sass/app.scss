@@ -8,13 +8,13 @@
 @import '~bootstrap/scss/bootstrap';
 
 .form-content{
-    display: block;
+    display: flex;
+    flex-direction: column;
     padding-top: 3%;
     justify-content: center;
-    position: absolute;
-    top: 20%;
+    margin-top: 20%;
     width: 550px;
-    height: 350px;
+    height: 50%;
     background-color:#61C9A8;
 }
 
@@ -26,4 +26,16 @@
 .button{
     background-color: #4C3B4D;
     color: #fffcf8;
+}
+
+.result{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 20%;
+    width: 500px;
+    height: 50%;
+    align-content: center;
+    align-self: center;
+    font-weight: bolder;
 }

@@ -8,19 +8,11 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-        <link href="{{ asset('front/css/style.css') }}" rel="stylesheet">
         <link media="all" href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-        <link href="{{ asset('admin/css/bootstrap.css') }}" rel="stylesheet">
-        <link href="{{ asset('admin/css/bootstrap.min.css') }}" rel="stylesheet">
-
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-
         <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-       
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
         <!-- Styles -->
         <style>
@@ -34,30 +26,9 @@
         </style>
     </head>
     <body class="antialiased">
-        <div class="container d-flex justify-content-center" id="app">     
+        <div class="container d-flex flex-column justify-content-center" id="app">     
             <form-component></form-component>
         </div>
-     <script src="{{asset('js/app.js')}}"></script>  
+     <script src="{{asset('js/app.js')}}"></script> 
     </body>
 </html>
-<!-- 
-    <div class="form-content">
-                <div>
-                    <h1 class="text-center title">Insert your image</h1>   
-                </div>
-                <div class="d-flex p-5 justify-content-center">
-                    <form class="bg-transparent d-flex flex-column justify-content-center" action="{{route('image.upload')}}" enctype="multipart/form-data" method="POST">
-                        <div class="p-4">
-                            <input type="file" name="image">
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        </div>    
-                        <div class="p-4">
-                            <label>Support JPEG, PNG and GIF images</label>
-                        </div>
-                        <div class="d-flex justify-content-center">
-                            <input class="btn button" type="submit" value="Enviar" accept="image/png, image/jpeg, image/GIF" @click="sendImage">
-                        </div>
-                    </form>
-                </div> 
-            </div>   
- -->

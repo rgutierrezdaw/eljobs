@@ -1866,21 +1866,48 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      title: "Insert your image",
-      type: "Support JPEG, PNG and GIF images",
-      image: ""
+      image: '',
+      predominantColor: '',
+      nearestColor: '',
+      hidden: true
     };
   },
   methods: {
+    onImageChange: function onImageChange(e) {
+      var files = e.target.files || e.dataTransfer.files;
+      if (!files.length) return;
+      this.createImage(files[0]);
+    },
+    createImage: function createImage(file) {
+      var reader = new FileReader();
+      var vm = this;
+
+      reader.onload = function (e) {
+        vm.image = e.target.result;
+      };
+
+      reader.readAsDataURL(file);
+    },
     sendImage: function sendImage() {
-      alert(this.image);
+      var _this = this;
+
+      axios.post('/upload', {
+        image: this.image
+      }).then(function (response) {
+        if (response.data) {
+          _this.predominantColor = "The predominant code color on image is: " + response.data[1];
+          _this.nearestColor = "The color closest to one of the palette is " + response.data[0];
+          _this.hidden = false;
+        }
+      });
     }
-  },
-  mounted: function mounted() {
-    console.log('Component mounted.');
   }
 });
 
@@ -1892,31 +1919,10 @@ __webpack_require__.r(__webpack_exports__);
   \*****************************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js").default;
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
 Vue.component('form-component', __webpack_require__(/*! ./components/form.vue */ "./resources/js/components/form.vue").default);
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
 var app = new Vue({
   el: '#app'
 });
@@ -37438,65 +37444,59 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "form-content" }, [
-    _c("div", [
-      _c("h1", { staticClass: "text-center title" }, [
-        _vm._v(_vm._s(_vm.title))
+  return _c("div", { staticClass: "container flex justify-content-around" }, [
+    _c("div", { staticClass: "form-content" }, [
+      _c("h1", { staticClass: "title text-center" }, [
+        _vm._v("Insert your image")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "d-flex p-5 justify-content-center" }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "bg-transparent d-flex flex-column justify-content-center"
+          },
+          [
+            _vm.image
+              ? _c("div", { staticClass: "p-4" }, [
+                  _c("img", {
+                    staticClass: "img-responsive",
+                    attrs: { src: _vm.image, height: "70", width: "90" }
+                  })
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("div", { staticClass: "p-4" }, [
+              _c("input", {
+                staticClass: "form-control",
+                attrs: { type: "file" },
+                on: { change: _vm.onImageChange }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "d-flex justify-content-center" }, [
+              _c(
+                "button",
+                { staticClass: "btn button", on: { click: _vm.sendImage } },
+                [_vm._v("Get color")]
+              )
+            ])
+          ]
+        )
       ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "d-flex p-5 justify-content-center" }, [
-      _c(
-        "form",
-        {
-          staticClass:
-            "bg-transparent d-flex flex-column justify-content-center",
-          attrs: { enctype: "multipart/form-data" },
-          on: {
-            submit: function($event) {
-              $event.preventDefault()
-              return _vm.sendImage()
-            }
-          }
-        },
-        [
-          _vm._m(0),
+    !_vm.hidden
+      ? _c("div", { staticClass: "result" }, [
+          _c("h4", [_vm._v(_vm._s(_vm.predominantColor))]),
           _vm._v(" "),
-          _c("div", { staticClass: "p-4" }, [
-            _c("label", [_vm._v(_vm._s(_vm.type))])
-          ]),
-          _vm._v(" "),
-          _vm._m(1)
-        ]
-      )
-    ])
+          _c("h4", [_vm._v(_vm._s(_vm.nearestColor))])
+        ])
+      : _vm._e()
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "p-4" }, [
-      _c("input", { attrs: { type: "file", name: "image" } })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "d-flex justify-content-center" }, [
-      _c("input", {
-        staticClass: "btn button",
-        attrs: {
-          type: "submit",
-          value: "Enviar",
-          accept: "image/png, image/jpeg, image/GIF"
-        }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
